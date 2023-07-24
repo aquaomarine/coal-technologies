@@ -9,18 +9,48 @@
     <nav>
         <a href="#history">01. History</a>
         <a href="#climb">02. Team</a>
+        
     </nav>
     <section class = "hero">
-        <h1>LOSANGELOS MOUNTAINS</h1>
+        <div class = "hero-content"> 
+        </div>
+        
     </section>
     <nav class = "nav2">
-        <text>LOSANGELOS MOUNTAINS</text>
-        <a href="#history">01. HISTORY</a>
+        <img class = "logo" src = "./images/logo.png">
         <a href="#climb">02. TEAM</a>
+        <a href="#history">01. HISTORY</a>
+        
     </nav>
     <section class = "history" id = "history">
-        <h2>01.</h2><h3>HISTORY</h3>
-        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin in ante viverra, rutrum erat rutrum, consectetur mi. Proin at maximus est. Nullam purus ex, iaculis sed erat sed, blandit tincidunt quam. Cras scelerisque id quam sed dignissim Pellentesque urna nunc, gravida quis hendrerit ac, tristique ut quam. Vivamus suscipit dignissim tortor nec congue</p>
+        <div class="history-content">
+            <h2>01.</h2><h3>HISTORY</h3>
+            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin in ante viverra, rutrum erat rutrum, consectetur mi. Proin at maximus est. Nullam purus ex, iaculis sed erat sed, blandit tincidunt quam. Cras scelerisque id quam sed dignissim Pellentesque urna nunc, gravida quis hendrerit ac, tristique ut quam. Vivamus suscipit dignissim tortor nec congue</p>
+        </div>
+        <div class = "carousel-wrapper">
+             <div class = "carousel">
+
+                <div class = "cards-wrapper">
+                    <div class = "card"><img class = "opacity" src = "./images/photo-14.png"></div>
+                    <div class = "card"><img class = "opacity" src = "./images/photo-15.png"></div>
+                    <div class = "card"><img class = "opacity" src = "./images/photo-14.png"></div>
+                    <div class = "card"><img class = "opacity" src = "./images/photo-15.png"></div>
+                    <div class = "card"><img class = "opacity" src = "./images/photo-14.png"></div>
+                    <div class = "card"><img class = "opacity" src = "./images/photo-15.png"></div>
+                    <div class = "card"><img class = "opacity" src = "./images/photo-14.png"></div>
+                    <div class = "card"><img class = "opacity" src = "./images/photo-15.png"></div>
+                </div>
+            </div>
+        </div>
+       
+        <div class="dots-wrapper">
+            <button class="dot active"></button>
+            <button class="dot"></button>
+            <!-- <button class="dot"></button> -->
+
+            </div>
+        
+        
     </section>
     <section class = "climb" id = "climb">
         <div>
@@ -31,7 +61,52 @@
     <footer>
 
     </footer>
+<script>
+    // In HTML, .display-area has the width of 4 cards = 880px. Each card is 200px width and margin set to 10px.
+// .display-area has a .cards-wrapper which contains all the cards. .cards-wrapper is set to display flex.
+// .display-area has overflow hidden to hide the portion of cards-wrapper which extends beyond the container's width.
+
+const wrapper = document.querySelector('.cards-wrapper');
+// console.log(wrapper.clientWidth);
+
+// grab the dots
+const dots = document.querySelectorAll('.dot');
+// the default active dot num which is array[0]
+let activeDotNum = 0;
+
+dots.forEach((dot, idx) => {  
+//   number each dot according to array index
+  dot.setAttribute('data-num', idx);
+  
+//   add a click event listener to each dot
+  dot.addEventListener('click', (e) => {
     
+    let clickedDotNum = e.target.dataset.num;
+    // console.log(clickedDotNum);
+//     if the dot clicked is already active, then do nothing
+    if(clickedDotNum == activeDotNum) {
+      // console.log('active');
+      return;
+    }
+    else {
+      // console.log('not active');
+      // shift the wrapper
+      let carousel = wrapper.parentElement.clientWidth;
+      // let pixels = -wrapper.clientWidth * clickedDotNum;
+      let pixels = -carousel * clickedDotNum
+      wrapper.style.transform = 'translateX('+ pixels + 'px)';
+//       remove the active class from the active dot
+      dots[activeDotNum].classList.remove('active');
+//       add the active class to the clicked dot
+      dots[clickedDotNum].classList.add('active');
+//       now set the active dot number to the clicked dot;
+      activeDotNum = clickedDotNum;
+    }
+    
+  });
+}); 
+</script>   
 </body>
 
+    
 </html>
